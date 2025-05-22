@@ -84,7 +84,11 @@
     favoriteIds: string[]
   }
 ]
-🚘 allCars
+
+#### 🧍‍♂️ 🚘 `allCars`
+
+```ts
+
 [
   {
     id: string,
@@ -94,7 +98,10 @@
     authorId: string
   }
 ]
-🕒 Simulated Data Fetch with Delay and Error Fallback
+#### 🧍‍♂️ 🕒 ` Simulated Data Fetch with Delay and Error Fallback`
+
+```ts
+
 function fakeFetch(key) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
