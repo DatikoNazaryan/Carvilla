@@ -1,16 +1,17 @@
-# 📱 Carvilla Mobile App
+# 🚘 Carvilla Mobile App
 
-**Carvilla** is a mobile version of the Carvilla SPA, implemented in React Native. It offers user authentication, car management, and personalized content feeds—all optimized for mobile devices.
+A mobile version of the Carvilla SPA, implemented in **React Native**, delivering a full-featured experience including authentication, card management, and a personalized feed—all powered by Redux and persistent storage.
 
 ---
 
 ## ⚙️ Tech Stack
 
-- **React Native** – UI development  
-- **React Navigation** – Navigation system  
-- **Redux Toolkit** – State management  
-- **AsyncStorage** – Persistent storage  
-- **Formik + Yup** – Forms and validation  
+- **React Native** – UI development
+- **React Navigation** – Navigation system
+- **Redux Toolkit** – State management
+- **AsyncStorage** – Persistent data
+- **Formik + Yup** – Forms & validation
+- **Expo** – App runtime & development
 
 ---
 
@@ -18,60 +19,61 @@
 
 ### 🧭 Navigation System
 
-#### 🔓 Auth Screens (accessible only to unauthorized users)
-- `/login` – Login form
-- `/signup` – Registration form
+- **Auth Screens**
+  - `/login`: Login for registered users
+  - `/signup`: User registration
+  - Access: Unauthorized users only
 
-#### 🔐 Protected Screens (accessible only to authorized users)
-- `/feed` – Global card feed with filters and sorting
-- `/profile` – Current user profile
-- `/profile/:userId` – View another user's profile
+- **Protected Screens**
+  - `/feed`: Global card feed (with filters & sorting)
+  - `/profile`: Current user profile
+  - `/profile/:userId`: View other users' profiles
+  - Access: Authorized users only
 
-#### 🔁 Redirection Rules
-- Unauthorized users accessing any protected route are redirected to `/login`
-- Authorized users accessing `/login` or `/signup` are redirected to `/feed`
+- **Redirection Logic**
+  - Unauthorized access → `/login`
+  - Authenticated access to `/login` or `/signup` → `/feed`
 
 ---
 
 ### 👤 Authentication
 
-- Login and signup with real-time validation
-- "Remember Me" functionality using `AsyncStorage`
-- Errors disappear on input change for better UX
+- Login and Signup with validation
+- “Remember Me” support via **AsyncStorage**
+- Real-time error reset on input change
+- Auto-login from local storage if remembered
 
 ---
 
-### 🚗 Card Management
+### 📝 Cards Management
 
-- Create, view, edit, delete, and search cards
-- Favorite/unfavorite cards
-- Filter and sort by creation date
-- User's own cards are editable with different styling
-
----
-
-### 🧑‍🤝‍🧑 Users Sidebar
-
-- Sidebar listing all users except the current one
-- Tapping a user navigates to their profile
-- Message shown if no other users exist
+- Create, edit, update, delete, and view cards
+- Add/remove cards to/from favorites
+- Sort and filter cards (all vs. favorites, by date)
+- Current user’s cards are editable (highlighted background)
 
 ---
 
-### 🪄 UI Highlights
+### 🧑‍🤝‍🧑 User Sidebar
+
+- List all registered users (except current)
+- Navigate to other users’ profile pages
+- Message if no other users available
+
+---
+
+### 🪄 UI Enhancements
 
 - Custom modal for creating cards
-- Scroll-to-top button appears on long lists
-- Friendly error messages and validation notices
-- Loader shown while fetching data
+- Scroll-to-top button in feed
+- Inline validation and error hints
+- Loader during initial data fetch
 
 ---
 
 ## 📦 Local Data Structure
 
-### AsyncStorage Keys
-
-#### 🧍‍♂️ `allUsers`
+### 👥 `allUsers`
 
 ```ts
 [
@@ -85,11 +87,7 @@
   }
 ]
 
----
-
-#### 🧍‍♂️ 🚘 `allCars`
-
-```ts
+🚘 allCars
 
 [
   {
@@ -101,11 +99,7 @@
   }
 ]
 
----
-
-#### 🧍‍♂️ 🕒 ` Simulated Data Fetch with Delay and Error Fallback`
-
-```ts
+🕒 Simulated Data Fetch with Delay and Error Fallback
 
 function fakeFetch(key) {
   return new Promise((resolve, reject) => {
