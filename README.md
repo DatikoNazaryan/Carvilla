@@ -85,6 +85,8 @@
   }
 ]
 
+---
+
 #### 🧍‍♂️ 🚘 `allCars`
 
 ```ts
@@ -98,6 +100,9 @@
     authorId: string
   }
 ]
+
+---
+
 #### 🧍‍♂️ 🕒 ` Simulated Data Fetch with Delay and Error Fallback`
 
 ```ts
