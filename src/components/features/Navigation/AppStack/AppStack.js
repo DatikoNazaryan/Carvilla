@@ -5,6 +5,7 @@ import Feed from "../../Feed/Feed";
 import Car from "../../Car/Car";
 import AddCarData from "../../AddCarData/AddCarData";
 import UpdateUserData from "../../UpdateUserData/UpdateUserData";
+import UpdateCarData from '../../UpdateCarData/UpdateCarData';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,6 +15,7 @@ const AppStack = () => (
         <Stack.Screen name="car" component={Car} />
         <Stack.Screen name="addCarData" component={AddCarData} />
         <Stack.Screen name="updateUserData" component={UpdateUserData} />
+      <Stack.Screen name="updateCarData" component={UpdateCarData} />
     </Stack.Navigator>
 );
 

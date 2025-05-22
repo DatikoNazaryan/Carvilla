@@ -21,15 +21,16 @@ function UsersName({setUsersModal}) {
     },[])
 
     return (
-        <FlatList
+      users.length ? <FlatList
             data={users}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) =>
-                <TouchableOpacity style={[styles.item, {backgroundColor: params?.userId === item.id ? "#c8f7c5" : "#f0f0f0"}]} onPress={() => onPressUser(item.id)}>
-                <Text style={styles.name}>{item.name}</Text>
-            </TouchableOpacity>}
+              <TouchableOpacity style={[styles.item, {backgroundColor: params?.userId === item.id ? "#c8f7c5" : "#f0f0f0"}]} onPress={() => onPressUser(item.id)}>
+                  <Text style={styles.name}>{item.name}</Text>
+              </TouchableOpacity>}
             contentContainerStyle={styles.list}
-        />
+          /> :
+      <Text style={styles.noUsers}>There are no other users in the system yet</Text>
     );
 }
 
@@ -46,6 +47,9 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: '#333',
     },
+    noUsers: {
+        fontSize: 18,
+    }
 });
 
 export default UsersName;

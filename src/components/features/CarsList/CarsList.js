@@ -10,18 +10,19 @@ import { updateUserisFavorite } from "../../../store/slices/userSlice";
 const screenWidth = Dimensions.get('window').width;
 const itemWidth = (screenWidth - 48) / 2;
 
-const CarList = forwardRef(({allCarsModel, handleScroll}, ref) => {
+const CarList = forwardRef(({ handleScroll}, ref) => {
         const dispatch = useDispatch();
         const navigation = useNavigation();
         const activUser = useSelector((state) => state.users.user);
+        const sortedCarsModel = useSelector(store => store.cars.sortedCars);
 
         const handlePress = useCallback((item) => {
-            navigation.navigate('car', { item: item });
+            navigation.navigate('car', { id: item.id });
         }, [navigation]);
 
         return ( <FlatList
             ref={ref}
-            data={allCarsModel}
+            data={sortedCarsModel}
             renderItem={({item}) => (
                 <TouchableOpacity
                     style={[styles.itemContainer, { width: itemWidth, backgroundColor: activUser.id === item.authorId ? "#c8f7c5" : "#fff" }]}

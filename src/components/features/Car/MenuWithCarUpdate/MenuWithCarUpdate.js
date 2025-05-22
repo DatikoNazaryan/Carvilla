@@ -24,7 +24,6 @@ const MenuWithCarUpdate = ({car}) => {
     const navigation = useNavigation();
     const activUser = useSelector(state => state.users.user);
     const [visible, setVisible] = useState(false);
-    const [usersModal, setUsersModal] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
 
     const toggleDeleteModalVisibility = useCallback(() => {
@@ -40,10 +39,15 @@ const MenuWithCarUpdate = ({car}) => {
     }, []);
 
     const deleteCarData = useCallback((id) => {
+            setVisible(false);
             dispatch(deleteCar(id));
             navigation.navigate('feed');
     },[]);
 
+     const editCarData = useCallback(() => {
+         setVisible(false);
+         navigation.navigate("updateCarData", {car: car});
+     },[]);
 
     return (
         <View style={styles.container}>
@@ -59,7 +63,7 @@ const MenuWithCarUpdate = ({car}) => {
                 <Text style={styles.title}>Menu</Text>
                 <TouchableOpacity
                     style={styles.optionBlock}
-                    onPress={() => (setVisible(false), setUsersModal(true))}
+                    onPress={editCarData}
                 >
                     <MaterialIcons name="edit" size={24} color="#4CAF50" />
                     <Text style={styles.option}>Edit Car</Text>

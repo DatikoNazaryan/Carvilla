@@ -14,7 +14,7 @@ import { sortData } from "../../../helpers/sortData";
 function Feed({ route }) {
     const { userId } = route.params || {};
     const dispatch = useDispatch();
-    const allCarsModel = useSelector(store => store.cars.allCarsModel);
+    const searchedCarsList = useSelector(store => store.cars.searchedCarsModel);
     const loading = useSelector(store => store.cars.loading);
     const sortBy = useSelector(store => store.cars.sortBy);
     const filterBy = useSelector(store => store.cars.filterBy);
@@ -23,19 +23,21 @@ function Feed({ route }) {
     const flatListRef = useRef(null);
     const [ isScrollToTop, setIsScrollToTop] = useState(false);
 
+    console.log()
+
     useEffect(() => {
         sortCars(sortBy);
-    }, [sortBy, allCarsModel, filterBy, userId]);
+    }, [sortBy, searchedCarsList, filterBy, userId]);
 
     const sortCars = (sort) => {
         if(filterBy === "all") {
             dispatch(setSortedCars(userId ?
-                sortData(allCarsModel.filter((car) => (car.authorId === userId)), sort) :
-                sortData(allCarsModel, sort)));
+                sortData(searchedCarsList.filter((car) => (car.authorId === userId)), sort) :
+                sortData(searchedCarsList, sort)));
         } else if (filterBy === "favorite") {
             dispatch(setSortedCars(userId ?
-                sortData(allCarsModel.filter((car) => (car.authorId === userId)).filter((car) => activUser.favoriteIds.includes(car.id)), sort) :
-                sortData(allCarsModel.filter((car) => activUser.favoriteIds.includes(car.id)), sort)));
+                sortData(searchedCarsList.filter((car) => (car.authorId === userId)).filter((car) => activUser.favoriteIds.includes(car.id)), sort) :
+                sortData(searchedCarsList.filter((car) => activUser.favoriteIds.includes(car.id)), sort)));
         }
     };
 
@@ -65,7 +67,7 @@ function Feed({ route }) {
                 </TouchableOpacity>
             )}
             {sortedCarsModel.length ?
-                <CarsList handleScroll={handleScroll} ref={flatListRef} allCarsModel={sortedCarsModel} /> :
+                <CarsList handleScroll={handleScroll} ref={flatListRef} /> :
                 <View style={styles.noCarsBlock}>
                     <Text style={styles.noCars}>There are no cars in the system yet</Text>
                 </View>

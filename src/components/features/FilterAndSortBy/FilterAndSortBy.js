@@ -93,7 +93,6 @@ export default FilterAndSortBy;
 const styles = StyleSheet.create({
     container: {
         padding: 20,
-        width: '100%',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'flex-end',

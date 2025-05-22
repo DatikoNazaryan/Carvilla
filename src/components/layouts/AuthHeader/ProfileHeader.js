@@ -3,6 +3,7 @@ import {useNavigation} from "@react-navigation/native";
 
 import MenuWithModal from "./MenuWithModal/MenuWithModal";
 import FilterAndSortBy from "../../features/FilterAndSortBy/FilterAndSortBy";
+import SearchCar from '../../features/SearchCar/SearchCar';
 
 function AuthHeader() {
     const navigation = useNavigation();
@@ -13,7 +14,10 @@ function AuthHeader() {
                 <Text style={[styles.logoTitle,]}>CARVILLA</Text>
             </TouchableOpacity>
             <MenuWithModal />
-            <FilterAndSortBy/>
+            <View style={styles.searchAndSort}>
+                <SearchCar />
+                <FilterAndSortBy/>
+            </View>
         </View>
     );
 }
@@ -36,6 +40,12 @@ const styles = StyleSheet.create({
     logo: {
         marginVertical: 20
     },
+    searchAndSort: {
+        width: "100%",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+    }
 });
 
 export default AuthHeader;
