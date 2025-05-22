@@ -1,82 +1,79 @@
-:
+# 📱 Carvilla Mobile App
 
-📱 Carvilla Mobile App
-A mobile version of the Carvilla SPA implemented with React Native, providing user authentication, car management, and personalized content feeds.
+**Carvilla** is a mobile version of the Carvilla SPA, implemented in React Native. It offers user authentication, car management, and personalized content feeds—all optimized for mobile devices.
 
-⚙️ Tech Stack
-React Native – UI development
+---
 
-React Navigation – Navigation system
+## ⚙️ Tech Stack
 
-Redux Toolkit – State management
+- **React Native** – UI development  
+- **React Navigation** – Navigation system  
+- **Redux Toolkit** – State management  
+- **AsyncStorage** – Persistent storage  
+- **Formik + Yup** – Forms and validation  
 
-AsyncStorage – Persistent storage
+---
 
-Formik + Yup – Forms & validation
+## 🚀 Features
 
-🚀 Features
-🧭 Navigation System
-Auth Screens:
+### 🧭 Navigation System
 
-/login: Login form for registered users
+#### 🔓 Auth Screens (accessible only to unauthorized users)
+- `/login` – Login form
+- `/signup` – Registration form
 
-/signup: Registration form
+#### 🔐 Protected Screens (accessible only to authorized users)
+- `/feed` – Global card feed with filters and sorting
+- `/profile` – Current user profile
+- `/profile/:userId` – View another user's profile
 
-Only accessible to unauthorized users
+#### 🔁 Redirection Rules
+- Unauthorized users accessing any protected route are redirected to `/login`
+- Authorized users accessing `/login` or `/signup` are redirected to `/feed`
 
-Protected Screens:
+---
 
-/feed: Global cad feed with sorting/filtering
+### 👤 Authentication
 
-/profile: Current user profile
+- Login and signup with real-time validation
+- "Remember Me" functionality using `AsyncStorage`
+- Errors disappear on input change for better UX
 
-/profile/:userId: View other users' profiles
+---
 
-Only accessible to authorized users
+### 🚗 Card Management
 
-Redirection rules:
+- Create, view, edit, delete, and search cards
+- Favorite/unfavorite cards
+- Filter and sort by creation date
+- User's own cards are editable with different styling
 
-Unauthorized users are redirected to /login
+---
 
-Authorized users trying to access /login or /signup are redirected to /feed
+### 🧑‍🤝‍🧑 Users Sidebar
 
-👤 Authentication
-Login and signup with form validation
+- Sidebar listing all users except the current one
+- Tapping a user navigates to their profile
+- Message shown if no other users exist
 
-“Remember Me” option using AsyncStorage
+---
 
-Real-time error clearing when inputs change
+### 🪄 UI Highlights
 
-📝 Cards Management
-Create, edit, search, update, delete and view cars
+- Custom modal for creating cards
+- Scroll-to-top button appears on long lists
+- Friendly error messages and validation notices
+- Loader shown while fetching data
 
-Add cards to favorites
+---
 
-Sort and filter cars
+## 📦 Local Data Structure
 
-Cards owned by the current user are editable
+### AsyncStorage Keys
 
-🧑‍🤝‍🧑 Users
-Sidebar with a list of users (excluding current)
+#### 🧍‍♂️ `allUsers`
 
-Navigate to profiles and view user-specific cars
-
-🪄 UI Highlights
-Custom modal for creating cards
-
-Persistent scroll-to-top button in feed
-
-Friendly error messages and validation notices
-
-Loader during initial data fetch
-
-📦 Local Data Structure
-AsyncStorage Keys:
-allUsers:
-
-ts
-Копировать
-Редактировать
+```ts
 [
   {
     id: string,
@@ -87,11 +84,7 @@ ts
     favoriteIds: string[]
   }
 ]
-allCars:
-
-ts
-Копировать
-Редактировать
+🚘 allCars
 [
   {
     id: string,
@@ -101,11 +94,7 @@ ts
     authorId: string
   }
 ]
-Data is loaded using a simulated delay with error fallback:
-
-ts
-Копировать
-Редактировать
+🕒 Simulated Data Fetch with Delay and Error Fallback
 function fakeFetch(key) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -122,11 +111,3 @@ function fakeFetch(key) {
     }, 2000);
   });
 }
-🛠 Installation & Run
-bash
-Копировать
-Редактировать
-git clone https://github.com/your-username/magiccards-mobile
-cd magiccards-mobile
-npm install
-npx expo start
