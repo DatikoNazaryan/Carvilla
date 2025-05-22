@@ -1,97 +1,132 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+:
 
-# Getting Started
+📱 Carvilla Mobile App
+A mobile version of the Carvilla SPA implemented with React Native, providing user authentication, car management, and personalized content feeds.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+⚙️ Tech Stack
+React Native – UI development
 
-## Step 1: Start Metro
+React Navigation – Navigation system
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+Redux Toolkit – State management
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+AsyncStorage – Persistent storage
 
-```sh
-# Using npm
-npm start
+Formik + Yup – Forms & validation
 
-# OR using Yarn
-yarn start
-```
+🚀 Features
+🧭 Navigation System
+Auth Screens:
 
-## Step 2: Build and run your app
+/login: Login form for registered users
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+/signup: Registration form
 
-### Android
+Only accessible to unauthorized users
 
-```sh
-# Using npm
-npm run android
+Protected Screens:
 
-# OR using Yarn
-yarn android
-```
+/feed: Global cad feed with sorting/filtering
 
-### iOS
+/profile: Current user profile
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+/profile/:userId: View other users' profiles
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+Only accessible to authorized users
 
-```sh
-bundle install
-```
+Redirection rules:
 
-Then, and every time you update your native dependencies, run:
+Unauthorized users are redirected to /login
 
-```sh
-bundle exec pod install
-```
+Authorized users trying to access /login or /signup are redirected to /feed
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+👤 Authentication
+Login and signup with form validation
 
-```sh
-# Using npm
-npm run ios
+“Remember Me” option using AsyncStorage
 
-# OR using Yarn
-yarn ios
-```
+Real-time error clearing when inputs change
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+📝 Cards Management
+Create, edit, search, update, delete and view cars
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+Add cards to favorites
 
-## Step 3: Modify your app
+Sort and filter cars
 
-Now that you have successfully run the app, let's make changes!
+Cards owned by the current user are editable
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+🧑‍🤝‍🧑 Users
+Sidebar with a list of users (excluding current)
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+Navigate to profiles and view user-specific cars
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+🪄 UI Highlights
+Custom modal for creating cards
 
-## Congratulations! :tada:
+Persistent scroll-to-top button in feed
 
-You've successfully run and modified your React Native App. :partying_face:
+Friendly error messages and validation notices
 
-### Now what?
+Loader during initial data fetch
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+📦 Local Data Structure
+AsyncStorage Keys:
+allUsers:
 
-# Troubleshooting
+ts
+Копировать
+Редактировать
+[
+  {
+    id: string,
+    name: string,
+    email: string,
+    password: string,
+    cardIds: string[],
+    favoriteIds: string[]
+  }
+]
+allCars:
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+ts
+Копировать
+Редактировать
+[
+  {
+    id: string,
+    title: string,
+    description: string,
+    creationDate: string,
+    authorId: string
+  }
+]
+Data is loaded using a simulated delay with error fallback:
 
-# Learn More
+ts
+Копировать
+Редактировать
+function fakeFetch(key) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const randomNum = Math.random();
+      if (randomNum < 0.3) reject();
 
-To learn more about React Native, take a look at the following resources:
+      const result = AsyncStorage.getItem(key);
+      if (!result) {
+        AsyncStorage.setItem(key, '[]');
+        resolve([]);
+      }
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+      resolve(JSON.parse(result));
+    }, 2000);
+  });
+}
+🛠 Installation & Run
+bash
+Копировать
+Редактировать
+git clone https://github.com/your-username/magiccards-mobile
+cd magiccards-mobile
+npm install
+npx expo start
