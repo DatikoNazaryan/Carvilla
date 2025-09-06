@@ -9,7 +9,7 @@ A mobile version of the Carvilla SPA, implemented in **React Native**, deliverin
 - **React Native** – UI development
 - **React Navigation** – Navigation system
 - **Redux Toolkit** – State management
-- **AsyncStorage** – Persistent data
+- **MMKVStorage** – Persistent data
 - **Formik + Yup** – Forms & validation
 - **Expo** – App runtime & development
 
