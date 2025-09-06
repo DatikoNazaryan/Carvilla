@@ -39,7 +39,7 @@ A mobile version of the Carvilla SPA, implemented in **React Native**, deliverin
 ### 👤 Authentication
 
 - Login and Signup with validation
-- “Remember Me” support via **AsyncStorage**
+- “Remember Me” support via **MMKVStorage**
 - Real-time error reset on input change
 - Auto-login from local storage if remembered
 
@@ -47,7 +47,7 @@ A mobile version of the Carvilla SPA, implemented in **React Native**, deliverin
 
 ### 📝 Cards Management
 
-- Create, edit, update, delete, and view cards
+- Create, edit, update, delete, search and view cards
 - Add/remove cards to/from favorites
 - Sort and filter cards (all vs. favorites, by date)
 - Current user’s cards are editable (highlighted background)
